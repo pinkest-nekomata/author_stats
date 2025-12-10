@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: stg__d2d_ebook_sales
+    columns:
+      - name: ebook_sale_key
+        data_tests:
+          - unique
+          - not_null
+  - name: stg__d2d_print_sales
+    columns:
+      - name: print_sale_key
+        data_tests:
+          - unique
+          - not_null
+  - name: stg__kdp_ebook_sales
+    columns:
+      - name: ebook_sale_key
+        data_tests:
+          - unique
+          - not_null
+  - name: stg__kdp_kenp_days
+    columns:
+      - name: kenp_key
+        data_tests:
+          - unique
+          - not_null

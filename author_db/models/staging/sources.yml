@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw_db
+    database: raw_db
+    schema: main
+    tables:
+      - name: raw__d2d_ebook_sales
+      - name: raw__d2d_print_sales
+      - name: raw__kdp_kenp
+      - name: raw__kdp_sales

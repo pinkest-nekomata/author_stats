@@ -1,0 +1,46 @@
+
+name: 'author_db'
+version: '1.0.0'
+
+# This setting configures which "profile" dbt uses for this project.
+# The author_stats project uses duckdb, so be sure to configure your profile like this:
+# author_stats_duckdb:
+#  outputs:
+#    dev:
+#      type: duckdb
+#      keep_open: false
+#      path: ~/Documents/Databaes/author_stats/dbs/model_db.duckdb
+#      attach:
+#        - path: ~/Documents/Databaes/author_stats/dbs/raw_db.duckdb
+#          alias: raw_db
+#          read_only: true
+#          type: duckdb
+#  target: dev
+profile: 'author_stats_duckdb'
+
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:         # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+
+
+# Configuring models
+# Full documentation: https://docs.getdbt.com/docs/configuring-models
+
+# Materialize core models as tables, and int and stg models as views in a private schema
+models:
+  author_db:
+    +materialized: table
+    intermediate:
+      +materialized: view
+      +schema: private
+    staging:
+      +materialized: view
+      +schema: private

@@ -1,0 +1,9 @@
+raw/*.csv
+raw/*.xlsx
+raw/*.db
+raw/*.wal
+raw/archive/
+raw/logs/
+dbs/
+logs/
+.DS_store

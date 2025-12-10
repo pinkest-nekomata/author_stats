@@ -1,0 +1,5 @@
+-- Union of the eBook and Print D2D Sales
+
+{{ dbt_utils.union_relations(
+    relations=[ref('int__d2d_ebook_sales'),ref('int__d2d_print_sales')]
+) }}

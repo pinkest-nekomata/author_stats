@@ -1,0 +1,12 @@
+version: 2
+
+seeds:
+  - name: seed__books
+    config:
+      column_types:
+        TITLE: varchar
+        TITLE_CODE: varchar
+        EBOOK_LIST_USD: varchar
+        PPRBK_LIST_USD: varchar
+        EBOOK_ISBN: varchar
+        PPRBK_ISBN: varchar

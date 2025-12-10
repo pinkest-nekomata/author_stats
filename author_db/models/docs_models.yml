@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: sales
+    columns:
+      - name: sale_key
+        data_tests:
+          - unique
+          - not_null

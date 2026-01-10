@@ -5,7 +5,7 @@ select
   , "eBook ASIN"        as ebook_asin
   , "Audiobook ASIN"    as audiobook_asin
   , "Audible ASIN"      as audible_asin
-  , "Marketplace"       as marketplace
+  , "Marketplace"       as marketplace_url
   , "KENP"              as kenp
   , file_name           
   , {{ dbt_utils.generate_surrogate_key(['kenp_date','ebook_asin','marketplace']) }} as kenp_key

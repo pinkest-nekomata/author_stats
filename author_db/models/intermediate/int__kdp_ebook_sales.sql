@@ -12,25 +12,23 @@ select
   , net_unit_sales
 
   , currency as currency_code
-  , books.ebook_list_usd::double / avg_list_price_wo_tax::double as cur_exchange_rate
-    --for Amazon, the best source of an est exchange rate is from the
-    --dynamic list price
+  , cur.rate as cur_exchange_rate
 
   , avg_list_price_wo_tax as unit_list_price_lcur
   , books.ebook_list_usd  as unit_list_price_usd
 
   , avg_offer_price_wo_tax as unit_offer_price_lcur
-  , avg_offer_price_wo_tax * cur_exchange_rate as unit_offer_price_usd
+  , avg_offer_price_wo_tax * cur.rate as unit_offer_price_usd
 
   , left(royalty_type,2)::numeric as royalty_percent
 
   , avg_delivery_cost as sales_channel_per_unit_raw
 
   , royalty as gross_royalty_lcur
-  , royalty * cur_exchange_rate as gross_royalty_usd
+  , royalty * cur.rate as gross_royalty_usd
 
   , round(unit_offer_price_lcur * net_unit_sales - gross_royalty_lcur,2) as sales_channel_share_lcur
-  , round(sales_channel_share_lcur * cur_exchange_rate,2) as sales_channel_share_usd
+  , round(sales_channel_share_lcur * cur.rate,2) as sales_channel_share_usd
 
   , 0 as d2d_share_lcur
   , 0 as d2d_share_usd
@@ -44,8 +42,15 @@ select
   , 'KDP' as report_source
 
 from {{ ref('stg__kdp_ebook_sales') }} as kdp_esales
+
 left join {{ ref('books') }} as books
     on kdp_esales.ebook_asin::varchar = books.ebook_asin::varchar
+
+left join {{ ref('stg__currency_exchange_rates') }} as cur
+    on   kdp_esales.currency = cur.from_cur
+    and  to_cur = 'USD'
+    and  kdp_esales.royalty_date >= cur.effective_from
+    and (kdp_esales.royalty_date <  cur.effective_to or cur.effective_to is null)
 
 where avg_offer_price_wo_tax > 0 --paid only
   and net_unit_sales != 0 --ignore simple returns

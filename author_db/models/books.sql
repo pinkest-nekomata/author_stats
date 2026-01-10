@@ -1,7 +1,9 @@
 select
     title      as title
   , title_code as title_code
-  , series     as series
+  
+  , series             as series
+  , num_in_series::int as num_in_series
 
   , ebook_list_usd::double as ebook_list_usd
   , pprbk_list_usd::double as pprbk_list_usd

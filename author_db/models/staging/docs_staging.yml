@@ -1,12 +1,135 @@
 version: 2
 
 models:
+  - name: stg__currency_exchange_rates
+    columns:
+      - name: cur_hist_key
+        description: Currency History Key (from_cur x to_cur x effective_from)
+        data_tests:
+          - unique
+          - not_null
+
+      - name: from_cur
+        description: '{{ doc("from_cur") }}'
+
+      - name: to_cur
+        description: '{{ doc("to_cur") }}'
+
+      - name: rate
+        description: '{{ doc("currency_conversion_rate") }}'
+
+      - name: source
+        description: '{{ doc("currency_conversion_rate_source") }}'
+
+      - name: effective_from
+        description: '{{ doc("effective_from_inclusive") }}'
+
+      - name: effective_to
+        description: '{{ doc("effective_to_exclusive") }}'
+
   - name: stg__d2d_ebook_sales
     columns:
       - name: ebook_sale_key
         data_tests:
           - unique
           - not_null
+        data_type: varchar
+
+      - name: start_date
+        description: '{{ doc("d2d_start_date") }}'
+        data_type: date
+
+      - name: end_date
+        description: '{{ doc("d2d_end_date") }}'
+        data_type: date
+
+      - name: publisher
+        description: Just Demon Cat Press for now
+        data_type: varchar
+
+      - name: title_id
+        description: '{{ doc("d2d_title_id") }}'
+        data_type: bigint
+
+      - name: ebook_isbn
+        description: '{{ doc("ebook_isbn") }}'
+        data_type: bigint
+
+      - name: title
+        data_type: varchar
+
+      - name: primary_author
+        data_type: varchar
+
+      - name: distributor
+        description: '{{ doc("d2d_distributor") }}'
+        data_type: varchar
+
+      - name: vendor
+        description: '{{ doc("d2d_vendor") }}'
+        data_type: varchar
+
+      - name: country
+        description: '{{ doc("country_code_2") }}'
+        data_type: varchar
+
+      - name: units_sold
+        data_type: bigint
+
+      - name: units_returned
+        data_type: bigint
+
+      - name: net_unit_sales
+        data_type: bigint
+
+      - name: sales_model
+        data_type: varchar
+
+      - name: retailer
+        data_type: varchar
+
+      - name: list_price_per_unit
+        description: '{{ docs("list_price_per_unit_lcur") }}'
+        data_type: double
+
+      - name: currency_code
+        description: '{{ docs("currency_code") }}'
+        data_type: varchar
+
+      - name: offer_price_per_unit
+        description: '{{ docs("offer_price_per_unit_lcur") }}'
+        data_type: double
+
+      - name: royalty_percent
+        data_type: bigint
+
+      - name: sales_channel_fee_tax_per_unit
+        data_type: double
+
+      - name: extended_sales_channel_revenue
+        data_type: double
+
+      - name: sales_channel_share
+        data_type: double
+
+      - name: d2d_share
+        data_type: double
+
+      - name: publisher_share
+        data_type: double
+
+      - name: publisher_share_usd
+        data_type: double
+
+      - name: is_verified
+        data_type: boolean
+
+      - name: file_name
+        data_type: varchar
+
+      - name: file_index
+        data_type: bigint
+
   - name: stg__d2d_print_sales
     columns:
       - name: print_sale_key

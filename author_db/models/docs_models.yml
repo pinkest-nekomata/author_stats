@@ -7,3 +7,47 @@ models:
         data_tests:
           - unique
           - not_null
+
+  - name: books
+    description: '{{ doc("dim_books") }}'
+    columns:
+      - name: title
+      
+      - name: title_code
+        description: '{{ doc("title_code") }}'
+        data_tests:
+          - unique
+          - not_null
+
+      - name: series
+        description: '{{ doc("series") }}'
+
+      - name: num_in_series
+        description: '{{ doc("num_in_series") }}'
+
+      - name: ebook_list_usd
+        description: '{{ doc("ebook_list_usd") }}'
+
+      - name: pprbk_list_usd
+        description: '{{ doc("pprbk_list_usd") }}'
+
+      - name: ebook_isbn
+        description: '{{ doc("ebook_isbn") }}'
+        data_tests:
+          - unique
+
+      - name: pprbk_isbn
+        description: '{{ doc("pprbk_isbn") }}'
+        data_tests:
+          - unique
+
+      - name: ebook_asin
+        description: '{{ doc("ebook_asin") }}'
+        data_tests:
+          - unique
+
+      - name: kenp
+        description: '{{ doc("kenp_per_book") }}'
+
+      - name: split_share
+        description: '{{ doc("split_share") }}'

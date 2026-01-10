@@ -2,6 +2,7 @@ version: 2
 
 seeds:
   - name: seed__books
+    description: '{{ doc("dim_books") }} Manually populated in this seed file.'
     config:
       column_types:
         TITLE: varchar
@@ -10,3 +11,85 @@ seeds:
         PPRBK_LIST_USD: varchar
         EBOOK_ISBN: varchar
         PPRBK_ISBN: varchar
+
+    columns:
+      - name: title_code
+        description: '{{ doc("title_code") }} Manually populated in this seed file.'
+        data_tests:
+          - unique
+          - not_null
+
+      - name: series
+        description: '{{ doc("series") }}'
+
+      - name: num_in_series
+        description: '{{ doc("num_in_series") }}'
+
+      - name: ebook_list_usd
+        description: '{{ doc("ebook_list_usd") }}'
+
+      - name: pprbk_list_usd
+        description: '{{ doc("pprbk_list_usd") }}'
+
+      - name: ebook_isbn
+        description: '{{ doc("ebook_isbn") }}'
+        data_tests:
+          - unique
+
+      - name: pprbk_isbn
+        description: '{{ doc("pprbk_isbn") }}'
+        data_tests:
+          - unique
+
+      - name: ebook_asin
+        description: '{{ doc("ebook_asin") }}'
+        data_tests:
+          - unique
+
+      - name: kenp
+        description: '{{ doc("kenp_per_book") }}'
+
+      - name: split_share
+        description: '{{ doc("split_share") }}'
+
+
+
+  - name: seed__currency_exchange_rates
+    description: '{{ doc("dim_currency_exchange_rates") }}'
+    columns:
+      - name: from_cur
+        description: '{{ doc("from_cur") }}'
+
+      - name: to_cur
+        description: '{{ doc("to_cur") }}'
+
+      - name: rate
+        description: '{{ doc("currency_conversion_rate") }}'
+
+      - name: source
+        description: '{{ doc("currency_conversion_rate_source") }}'
+
+      - name: effective_from
+        description: '{{ doc("effective_from_inclusive") }}'
+
+      - name: effective_to
+        description: '{{ doc("effective_to_exclusive") }}'
+
+  - name: seed__kenp_rates
+    description: '{{ doc ("dim_kenp_rates") }}'
+    columns:
+      - name: report_month
+        description: '{{ doc("report_month") }}'
+
+      - name: marketplace
+        description: '{{ doc("marketplace") }}'
+
+      - name: currency
+        description: '{{ doc("currency_code") }}'
+
+      - name: kenp_rate
+        description: '{{ doc("kenp_rate") }}'
+
+      - name: is_final
+        description: '{{ doc("is_final") }}'
+

@@ -1,7 +1,7 @@
 {
     "files.associations": {
         "*.sql": "jinja-sql",
-        "*.yml": "jinja-yml"
+        "*.yml": "jinja-yaml"
     },
     "dbt.perspectiveTheme": "Vintage"
 }

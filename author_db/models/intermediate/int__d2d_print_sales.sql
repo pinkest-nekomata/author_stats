@@ -30,14 +30,14 @@ select
   , round(unit_offer_price_lcur * net_unit_sales - gross_royalty_lcur,2) as sales_channel_share_lcur
   , round(sales_channel_share_lcur * cur_exchange_rate,2) as sales_channel_share_usd
 
-  , round(gross_royalty_lcur - publisher_share,2) as d2d_share_lcur
-  , round(gross_royalty_usd - publisher_share_usd,2) as d2d_share_usd
+  , round(gross_royalty_lcur - publisher_share.   ,2) as d2d_share_lcur
+  , round(gross_royalty_usd  - publisher_share_usd,2) as d2d_share_usd
 
   , publisher_share
   , publisher_share_usd
 
-  , round(publisher_share * coalesce(split_share),2)     as my_share_lcur
-  , round(publisher_share_usd * coalesce(split_share),2) as my_share_usd
+  , round(publisher_share     * coalesce(split_share,1),2)     as my_share_lcur
+  , round(publisher_share_usd * coalesce(split_share,1),2) as my_share_usd
 
   , is_verified
   , left(right(file_name, 14),10)::date as export_date
